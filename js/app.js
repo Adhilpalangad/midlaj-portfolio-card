@@ -28,13 +28,15 @@ function setupVCardDownload() {
       'VERSION:3.0',
       'N:Palanagad;Midlaj;;;',
       'FN:Midlaj Palanagad',
-      'ORG:Event Planning & Production',
-      'TITLE:Event Planner & Technician',
+      'ORG:Electrical Engineer • Events & Exhibitions • Robotics',
+      'TITLE:Event Planner and Technical Engineer',
       'TEL;TYPE=CELL,VOICE,PREF:+916235805552',
+      'TEL;TYPE=CELL,VOICE:+918606999358',
       'EMAIL;TYPE=INTERNET,PREF:midlajryl@gmail.com',
-      'ADR;TYPE=WORK:;;Thamarassery;Kerala;;;India',
-      'NOTE:Event Planner & Technician based in Thamarassery, Kerala. Specialist in Stage Lighting, Live Sound, AV Systems & Event Management.',
-      'URL:https://maps.google.com/?q=Thamarassery,+Kerala,+India',
+      'ADR;TYPE=WORK:;;HiLITE Business Park;Calicut;Kerala;;India',
+      'NOTE:Event Planner and Technical Engineer, Electrical Engineer based at HiLITE Business Park, Calicut. Specialist in Events & Exhibitions, Robotics Engineering. Instagram: @midlajpalangad',
+      'URL:https://maps.google.com/?q=HiLITE+Business+Park,+Calicut',
+      'URL;TYPE=INSTAGRAM:https://www.instagram.com/midlajpalangad/',
       'END:VCARD'
     ].join('\r\n');
 
@@ -62,16 +64,24 @@ function setupVCardDownload() {
 }
 
 /**
- * 2. Copy Triggers for Phone and Email
+ * 2. Copy Triggers for Phone, Alt Phone, and Email
  */
 function setupCopyTriggers() {
   const copyPhone = document.getElementById('copyPhoneTrigger');
+  const copyAltPhone = document.getElementById('copyAltPhoneTrigger');
   const copyEmail = document.getElementById('copyEmailTrigger');
 
   if (copyPhone) {
     copyPhone.addEventListener('click', () => {
       const phone = copyPhone.getAttribute('data-copy') || '+916235805552';
-      copyToClipboard(phone, 'Phone number copied to clipboard!');
+      copyToClipboard(phone, 'Primary phone copied to clipboard!');
+    });
+  }
+
+  if (copyAltPhone) {
+    copyAltPhone.addEventListener('click', () => {
+      const altPhone = copyAltPhone.getAttribute('data-copy') || '+918606999358';
+      copyToClipboard(altPhone, 'Alternate phone copied to clipboard!');
     });
   }
 
@@ -193,8 +203,8 @@ function setupShareModal() {
   if (nativeShareBtn) {
     nativeShareBtn.addEventListener('click', async () => {
       const shareData = {
-        title: 'Midlaj Palanagad - Event Planner & Technician',
-        text: 'Contact Card of Midlaj Palanagad - Event Planner & Technician in Thamarassery, Kerala.',
+        title: 'Midlaj Palanagad - Event Planner and Technical Engineer',
+        text: 'Contact Card of Midlaj Palanagad - Event Planner & Technical Engineer, Electrical Engineer at HiLITE Business Park, Calicut.',
         url: window.location.href
       };
 
