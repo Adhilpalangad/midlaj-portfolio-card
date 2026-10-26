@@ -1,0 +1,934 @@
+/* ==========================================================================
+   MIDLAJ PALANAGAD - DIGITAL CONTACT CARD & PORTFOLIO
+   Design System & Styling
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Custom Properties & Design Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand Colors */
+  --primary-blue: #0ea5e9;
+  --primary-gradient-start: #1ba8f0;
+  --primary-gradient-mid: #38bdf8;
+  --primary-gradient-end: #0284c7;
+  --primary-dark: #0284c7;
+  --primary-light: #e0f2fe;
+
+  /* Accent Colors */
+  --whatsapp-green: #25D366;
+  --whatsapp-dark: #20bd5a;
+  --whatsapp-light: #e8f9ed;
+  --instagram-grad: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  --phone-color: #0ea5e9;
+  --email-color: #6366f1;
+
+  /* Neutral Surface & Text */
+  --bg-desktop: #edf2f7;
+  --bg-mobile: #f8fafc;
+  --bg-card: #ffffff;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --text-subtle: #94a3b8;
+  --border-light: #f1f5f9;
+  --border-subtle: #e2e8f0;
+  --btn-dark: #0f172a;
+  --btn-dark-hover: #1e293b;
+
+  /* Typography */
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Elevation Shadows */
+  --shadow-card: 0 10px 30px -8px rgba(15, 23, 42, 0.07), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+  --shadow-float: 0 20px 40px -10px rgba(14, 165, 233, 0.25);
+  --shadow-btn: 0 8px 20px -4px rgba(15, 23, 42, 0.35);
+  --shadow-whatsapp: 0 8px 20px -4px rgba(37, 211, 102, 0.4);
+
+  /* Border Radii */
+  --radius-card: 26px;
+  --radius-btn: 14px;
+  --radius-circle: 50%;
+  --radius-pill: 9999px;
+
+  /* Layout */
+  --max-width: 440px;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Base Setup
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-mobile);
+  color: var(--text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ambient glow for desktop background */
+.ambient-background {
+  display: none;
+}
+
+@media (min-width: 540px) {
+  body {
+    background-color: var(--bg-desktop);
+    padding: 30px 16px 50px 16px;
+  }
+
+  .ambient-background {
+    display: block;
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .ambient-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.45;
+  }
+
+  .glow-1 {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, #38bdf8 0%, rgba(56, 189, 248, 0) 70%);
+    top: -100px;
+    right: calc(50% - 350px);
+  }
+
+  .glow-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #0284c7 0%, rgba(2, 132, 199, 0) 70%);
+    bottom: -150px;
+    left: calc(50% - 400px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Main Mobile Viewport Frame
+   -------------------------------------------------------------------------- */
+.card-viewport {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  min-height: 100vh;
+  background-color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 540px) {
+  .card-viewport {
+    border-radius: 36px;
+    overflow: hidden;
+    min-height: auto;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.12), 0 0 1px 1px rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Hero Banner (Sky Blue Gradient with Curved Rings)
+   -------------------------------------------------------------------------- */
+.hero-banner {
+  position: relative;
+  background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-mid) 50%, var(--primary-gradient-end) 100%);
+  height: 170px;
+  padding: 24px 20px 0 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.banner-waves {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.banner-top-bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.banner-brand-title {
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.banner-share-btn {
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.banner-share-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.06);
+}
+
+.banner-share-btn:active {
+  transform: scale(0.95);
+}
+
+/* --------------------------------------------------------------------------
+   5. Content Wrapper
+   -------------------------------------------------------------------------- */
+.content-wrapper {
+  position: relative;
+  z-index: 3;
+  padding: 0 16px 28px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: -65px; /* Overlaps into hero banner */
+}
+
+/* --------------------------------------------------------------------------
+   6. Card 1: Primary Profile Card
+   -------------------------------------------------------------------------- */
+.profile-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 0 20px 22px 20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Avatar Container */
+.avatar-container {
+  position: relative;
+  margin-top: -55px; /* Overlaps into blue banner */
+  margin-bottom: 12px;
+}
+
+.avatar-ring {
+  width: 110px;
+  height: 110px;
+  border-radius: var(--radius-circle);
+  border: 4.5px solid #ffffff;
+  box-shadow: 0 8px 24px -4px rgba(14, 165, 233, 0.35), 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%; /* Perfectly centered headshot */
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.05);
+}
+
+/* Status indicator badge */
+.status-indicator {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.status-dot {
+  width: 13px;
+  height: 13px;
+  background-color: #10b981;
+  border-radius: var(--radius-circle);
+  position: relative;
+}
+
+.status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background-color: inherit;
+  opacity: 0.6;
+  animation: pulseBadge 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseBadge {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Name & Heading */
+.profile-heading {
+  margin-bottom: 18px;
+}
+
+.profile-name {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.25;
+}
+
+.profile-designation {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-top: 4px;
+  letter-spacing: 0.2px;
+}
+
+/* Quick Actions Row (4 buttons) */
+.quick-actions-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: transform 0.2s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+}
+
+.action-btn:active {
+  transform: translateY(1px) scale(0.96);
+}
+
+.action-icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-circle);
+  background-color: #f8fafc;
+  border: 1.2px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #334155;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+  transition: all 0.25s ease;
+}
+
+.action-btn:hover .action-icon-circle {
+  background-color: var(--primary-light);
+  border-color: var(--primary-blue);
+  color: var(--primary-dark);
+  box-shadow: 0 6px 14px -3px rgba(14, 165, 233, 0.25);
+}
+
+.action-btn:hover .whatsapp-circle {
+  background-color: var(--whatsapp-light);
+  border-color: var(--whatsapp-green);
+  color: var(--whatsapp-dark);
+  box-shadow: 0 6px 14px -3px rgba(37, 211, 102, 0.3);
+}
+
+.action-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.1px;
+}
+
+/* Primary CTA: Save Contact Button */
+.btn-save-contact {
+  width: 100%;
+  height: 48px;
+  background-color: var(--btn-dark);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-family: inherit;
+  font-size: 0.94rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-save-contact:hover {
+  background-color: var(--btn-dark-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -4px rgba(15, 23, 42, 0.45);
+}
+
+.btn-save-contact:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* --------------------------------------------------------------------------
+   7. Card 2: Details & Services Card
+   -------------------------------------------------------------------------- */
+.details-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 22px 20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  animation: slideUpFade 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.details-section-header {
+  margin-bottom: 10px;
+}
+
+.details-section-header.margin-top-lg {
+  margin-top: 22px;
+}
+
+.section-badge-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+}
+
+/* Info List Items */
+.info-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.85rem;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-left {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-muted);
+}
+
+.info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-subtle);
+}
+
+.info-label {
+  font-weight: 500;
+  font-size: 0.84rem;
+}
+
+.info-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-align: right;
+  max-width: 60%;
+}
+
+.strong-value {
+  font-weight: 700;
+  color: var(--text-dark);
+  font-size: 0.84rem;
+  letter-spacing: 0.2px;
+}
+
+.email-value {
+  text-transform: lowercase;
+  word-break: break-all;
+}
+
+.link-value {
+  color: var(--text-dark);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link-value:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.highlight-tag {
+  font-size: 0.75rem;
+  color: var(--primary-dark);
+  background-color: var(--primary-light);
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* Copyable Value Trigger */
+.copyable-value {
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.copyable-value:hover {
+  background-color: #f1f5f9;
+}
+
+.mini-copy-btn {
+  background: none;
+  border: none;
+  color: var(--text-subtle);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  transition: color 0.2s ease;
+}
+
+.copyable-value:hover .mini-copy-btn {
+  color: var(--primary-blue);
+}
+
+/* --------------------------------------------------------------------------
+   8. Social Circles Row (WhatsApp, Instagram, Call, Email)
+   -------------------------------------------------------------------------- */
+.social-circles-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 16px 0 20px 0;
+}
+
+.social-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.social-circle:hover {
+  transform: translateY(-3px) scale(1.08);
+}
+
+.social-circle:active {
+  transform: scale(0.96);
+}
+
+.whatsapp-brand {
+  background-color: var(--whatsapp-green);
+  color: #ffffff;
+  box-shadow: 0 6px 16px -2px rgba(37, 211, 102, 0.45);
+}
+
+.instagram-brand {
+  background: var(--instagram-grad);
+  color: #ffffff;
+  box-shadow: 0 6px 16px -2px rgba(225, 48, 108, 0.4);
+}
+
+.phone-brand {
+  background-color: var(--phone-color);
+  color: #ffffff;
+  box-shadow: 0 6px 16px -2px rgba(14, 165, 233, 0.4);
+}
+
+.email-brand {
+  background-color: var(--email-color);
+  color: #ffffff;
+  box-shadow: 0 6px 16px -2px rgba(99, 102, 241, 0.4);
+}
+
+/* Action Buttons inside Card 2 */
+.btn-whatsapp-primary {
+  width: 100%;
+  height: 48px;
+  background-color: var(--whatsapp-green);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: var(--radius-btn);
+  font-size: 0.92rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: var(--shadow-whatsapp);
+  margin-bottom: 12px;
+  transition: all 0.25s ease;
+}
+
+.btn-whatsapp-primary:hover {
+  background-color: var(--whatsapp-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -2px rgba(37, 211, 102, 0.5);
+}
+
+.btn-whatsapp-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-share-profile {
+  width: 100%;
+  height: 46px;
+  background-color: #ffffff;
+  color: var(--text-dark);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-btn);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-share-profile:hover {
+  background-color: #f8fafc;
+  border-color: var(--text-subtle);
+  transform: translateY(-1px);
+}
+
+.btn-share-profile:active {
+  transform: scale(0.98);
+}
+
+/* --------------------------------------------------------------------------
+   9. Services Strip & Badges
+   -------------------------------------------------------------------------- */
+.services-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 6px;
+}
+
+.service-pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border-subtle);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.2px;
+  transition: all 0.2s ease;
+}
+
+.service-pill:hover {
+  background-color: #ffffff;
+  color: var(--primary-dark);
+  border-color: var(--primary-blue);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   10. Minimal Clean Footer
+   -------------------------------------------------------------------------- */
+.profile-footer {
+  text-align: center;
+  padding-top: 6px;
+}
+
+.footer-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.footer-subtext {
+  font-size: 0.7rem;
+  color: var(--text-subtle);
+  margin-top: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   11. Modal: Share Profile & QR Code
+   -------------------------------------------------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card {
+  position: relative;
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 360px;
+  border-radius: 24px;
+  padding: 26px 22px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  transform: scale(0.92) translateY(10px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-backdrop.active .modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-circle);
+  background-color: #f1f5f9;
+  border: none;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: #e2e8f0;
+  color: var(--text-dark);
+}
+
+.modal-header {
+  margin-bottom: 18px;
+}
+
+.modal-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.modal-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.qr-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0 22px 0;
+}
+
+.qrcode-box {
+  padding: 12px;
+  background-color: #ffffff;
+  border: 2px dashed #cbd5e1;
+  border-radius: 16px;
+  display: inline-block;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.qrcode-box img, .qrcode-box canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-action-btn {
+  width: 100%;
+  height: 46px;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primary-action {
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  border: none;
+}
+
+.primary-action:hover {
+  background-color: var(--primary-dark);
+}
+
+.secondary-action {
+  background-color: #f8fafc;
+  color: var(--text-dark);
+  border: 1px solid var(--border-subtle);
+}
+
+.secondary-action:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+/* --------------------------------------------------------------------------
+   12. Toast Notification Pill
+   -------------------------------------------------------------------------- */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  background-color: #0f172a;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: toastPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.toast-icon {
+  color: #10b981;
+}
+
+@keyframes toastPop {
+  0% { transform: translateY(20px) scale(0.9); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes slideUpFade {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   13. Responsive Adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 360px) {
+  .profile-name {
+    font-size: 1.25rem;
+  }
+  .action-icon-circle {
+    width: 44px;
+    height: 44px;
+  }
+  .action-label {
+    font-size: 0.68rem;
+  }
+}
